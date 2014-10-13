@@ -1,18 +1,15 @@
 package main
 
-import "log"
+type Notifier interface {
+	Send(event *ServiceEvent) error
+}
 
 type Notification struct {
 	Hipchat *Hipchat `yaml:"hipchat,omitempty"`
 }
 
 func (n *Notification) Send(event *ServiceEvent) error {
-	if n.Hipchat != nil {
-		err := n.Hipchat.Send(event)
-		if err != nil {
-			log.Println(err)
-		}
-	}
+	event.SendWithNotifier(n.Hipchat)
 
 	return nil
 }

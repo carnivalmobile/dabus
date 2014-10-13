@@ -10,12 +10,6 @@ type ServiceObserver struct {
 	subsSet *dbus.SubscriptionSet
 }
 
-type ServiceEvent struct {
-	Service      string
-	ActiveStatus string
-	SubStatus    string
-}
-
 func NewServiceObserver(services []string) (*ServiceObserver, error) {
 	conn, err := dbus.New()
 	if err != nil {
