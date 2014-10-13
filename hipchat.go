@@ -54,7 +54,7 @@ func (h *Hipchat) sendFailed(client HipchatClient, event *ServiceEvent) error {
 
 func (h *Hipchat) sendRestart(client HipchatClient, event *ServiceEvent) error {
 	msg := fmt.Sprintf(restartMessage, event.Service)
-	return h.send(client, hipchat.ColorGreen, hipchat.FormatHTML, msg, false)
+	return h.send(client, hipchat.ColorGreen, hipchat.FormatHTML, msg, true)
 }
 
 func (h *Hipchat) send(client HipchatClient, color, format, message string, notify bool) error {
