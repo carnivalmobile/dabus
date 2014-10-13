@@ -1,0 +1,10 @@
+[Unit]
+Description=Dabus
+
+[Service]
+ExecStart=/opt/bin/dabus /etc/dabus/conf.yaml
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
