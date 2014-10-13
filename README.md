@@ -10,7 +10,7 @@ It is configured through a YAML file, and you can run it like this:
 
 `dabus config.yaml`
 
-A [sample configuration file is available](sample_config.yaml).
+A [sample configuration file is available](sample_config.yaml) as is a [sample services file](dabus.service).
 
 ## Project Setup
 
