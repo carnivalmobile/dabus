@@ -1,0 +1,9 @@
+services:
+  - redis@arch.service
+notify:
+  hipchat:
+    room:  hipchatRoom
+    token: hipchatToken
+    on_active:  true
+    on_failed:  true
+    on_restart: true
