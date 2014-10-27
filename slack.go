@@ -10,9 +10,10 @@ const (
 )
 
 type SlackAttachment struct {
-	Fallback string `json:"fallback"`
-	Text     string `json:"text"`
-	Color    string `json:"color"`
+	Fallback string   `json:"fallback"`
+	Text     string   `json:"text"`
+	Color    string   `json:"color"`
+	MrkdwnIn []string `json:"mrkdwn_in"`
 }
 
 type SlackMessage struct {
@@ -50,7 +51,7 @@ func (s *Slack) SendWithClient(client HTTPClient, event *ServiceEvent) error {
 
 func (s *Slack) composeMessage(color string, message string) *SlackMessage {
 	attachments := SlackAttachment{
-		message, message, color,
+		message, message, color, []string{"fallback", "text"},
 	}
 
 	return &SlackMessage{s.Channel, "Systemd", []SlackAttachment{attachments}}
