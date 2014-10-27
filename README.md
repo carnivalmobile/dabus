@@ -1,8 +1,8 @@
 # Dabus
 
-Dabus is a systemd dbus notification observer written in Go, bundled with a Hipchat notifier.
+Dabus is a systemd dbus notification observer written in Go, bundled with a Hipchat and Slack notifier.
 
-If your systemd services stop, start or restart, you can receive a Hipchat notification.
+If your systemd services stop, start or restart, you can receive a Hipchat or Slack notification.
 
 This is useful for monitoring services on CoreOS machines.
 
