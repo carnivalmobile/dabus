@@ -10,8 +10,12 @@ type Notification struct {
 }
 
 func (n *Notification) Send(event *ServiceEvent) error {
-	event.SendWithNotifier(n.Hipchat)
-	event.SendWithNotifier(n.Slack)
+	if n.Hipchat != nil {
+		event.SendWithNotifier(n.Hipchat)
+	}
+	if n.Slack != nil {
+		event.SendWithNotifier(n.Slack)
+	}
 
 	return nil
 }

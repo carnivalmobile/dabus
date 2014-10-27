@@ -9,10 +9,6 @@ type ServiceEvent struct {
 }
 
 func (event *ServiceEvent) SendWithNotifier(notifier Notifier) error {
-	if notifier == nil {
-		return nil
-	}
-
 	err := notifier.Send(event)
 	if err != nil {
 		log.Println(err)
