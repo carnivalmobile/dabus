@@ -13,7 +13,13 @@ notify:
     on_active:  true
     on_failed:  true
     on_restart: true
-
+  slack:
+    team:    team
+    channel: channel
+    token:   token
+    on_active:  true
+    on_failed:  true
+    on_restart: true
 `
 
 func TestNewConfigServices(t *testing.T) {
@@ -60,5 +66,41 @@ func TestNewConfigHipchat(t *testing.T) {
 
 	if !hipchat.Restart {
 		t.Error("Invalid hipchat on_restart")
+	}
+}
+
+func TestNewConfigSlack(t *testing.T) {
+	config, err := NewConfig([]byte(config))
+	if err != nil {
+		t.Fatal("Error during config parsing")
+	}
+
+	slack := config.Notifier.Slack
+	if slack == nil {
+		t.Fatal("Error during notify config parsing")
+	}
+
+	if slack.Team != "team" {
+		t.Error("Invalid slack team")
+	}
+
+	if slack.Channel != "channel" {
+		t.Error("Invalid slack channel")
+	}
+
+	if slack.Token != "token" {
+		t.Error("Invalid slack token")
+	}
+
+	if !slack.Active {
+		t.Error("Invalid slack on_active")
+	}
+
+	if !slack.Failed {
+		t.Error("Invalid slack on_failed")
+	}
+
+	if !slack.Restart {
+		t.Error("Invalid slack on_restart")
 	}
 }
