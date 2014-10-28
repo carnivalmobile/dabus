@@ -9,7 +9,7 @@ import (
 const (
 	activeMessage  = "Service %s is active"
 	failedMessage  = "Service %s failed"
-	restartMessage = "Service %s is auto-restarted"
+	restartMessage = "Service %s has auto-restarted"
 )
 
 type HipchatClient interface {

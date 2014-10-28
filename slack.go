@@ -6,7 +6,7 @@ const (
 	slackEndpoint       = "https://%s.slack.com/services/hooks/incoming-webhook?token=%s"
 	slackActiveMessage  = "Service *%s* is active"
 	slackFailedMessage  = "Service *%s* failed"
-	slackRestartMessage = "Service *%s* is auto-restarted"
+	slackRestartMessage = "Service *%s* has auto-restarted"
 )
 
 type SlackAttachment struct {
