@@ -35,6 +35,7 @@ func Test_SendSlackCommon(t *testing.T) {
 }
 
 func Test_SendSlackActive(t *testing.T) {
+	event.ActiveStatus = "active"
 	slack.SendWithClient(mockHTTPclient, event)
 
 	if mockHTTPclient.Message.Attachments[0].Color != "good" {
@@ -76,11 +77,11 @@ func Test_SendSlackRestart(t *testing.T) {
 		t.Errorf("Invalid slack color.")
 	}
 
-	if mockHTTPclient.Message.Attachments[0].Text != "Service *foo.service* is auto-restarted" {
+	if mockHTTPclient.Message.Attachments[0].Text != "Service *foo.service* has auto-restarted" {
 		t.Errorf("Invalid slack text.")
 	}
 
-	if mockHTTPclient.Message.Attachments[0].Fallback != "Service *foo.service* is auto-restarted" {
+	if mockHTTPclient.Message.Attachments[0].Fallback != "Service *foo.service* has auto-restarted" {
 		t.Errorf("Invalid slack fallback.")
 	}
 }

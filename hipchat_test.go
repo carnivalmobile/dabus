@@ -69,7 +69,7 @@ func Test_SendRestart(t *testing.T) {
 	expected := hipchat.MessageRequest{
 		RoomId:        "SampleRoom",
 		From:          "Systemd",
-		Message:       "Service foo.service is auto-restarted",
+		Message:       "Service foo.service has auto-restarted",
 		Color:         hipchat.ColorGreen,
 		MessageFormat: hipchat.FormatHTML,
 		Notify:        true,
