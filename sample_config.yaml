@@ -2,12 +2,11 @@ services:
   - redis@arch.service
 notify:
   slack:
-    team:    room
-    channel: channel
-    token:   token
-    on_active:  true
-    on_failed:  true
-    on_restart: true
+    webhook_url: webhook_url
+    channel:     channel
+    on_active:   true
+    on_failed:   true
+    on_restart:  true
   hipchat:
     room:  hipchatRoom
     token: hipchatToken
