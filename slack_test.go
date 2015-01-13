@@ -14,12 +14,11 @@ func (c *MockHTTPClient) PostJSON(url string, data interface{}) error {
 var mockHTTPclient = &MockHTTPClient{}
 
 var slack = &Slack{
-	Team:    "SampleTeam",
-	Channel: "SampleRoom",
-	Token:   "foo",
-	Active:  true,
-	Failed:  true,
-	Restart: true,
+	WebhookURL: "http://sample.slack.com/",
+	Channel:    "SampleRoom",
+	Active:     true,
+	Failed:     true,
+	Restart:    true,
 }
 
 func Test_SendSlackCommon(t *testing.T) {

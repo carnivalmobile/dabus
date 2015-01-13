@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 const (
-	slackEndpoint       = "https://%s.slack.com/services/hooks/incoming-webhook?token=%s"
 	slackActiveMessage  = "Service *%s* is active"
 	slackFailedMessage  = "Service *%s* failed"
 	slackRestartMessage = "Service *%s* has auto-restarted"
@@ -23,12 +22,11 @@ type SlackMessage struct {
 }
 
 type Slack struct {
-	Team    string `yaml:"team,omitempty"`
-	Channel string `yaml:"channel,omitempty"`
-	Token   string `yaml:"token,omitempty"`
-	Active  bool   `yaml:"on_active,omitempty"`
-	Failed  bool   `yaml:"on_failed,omitempty"`
-	Restart bool   `yaml:"on_restart,omitempty"`
+	WebhookURL string `yaml:"webhook_url,omitempty"`
+	Channel    string `yaml:"channel,omitempty"`
+	Active     bool   `yaml:"on_active,omitempty"`
+	Failed     bool   `yaml:"on_failed,omitempty"`
+	Restart    bool   `yaml:"on_restart,omitempty"`
 }
 
 func (s *Slack) Send(event *ServiceEvent) error {
@@ -76,6 +74,5 @@ func (s *Slack) sendRestart(client HTTPClient, event *ServiceEvent) error {
 }
 
 func (s *Slack) send(client HTTPClient, message *SlackMessage) error {
-	url := fmt.Sprintf(slackEndpoint, s.Team, s.Token)
-	return client.PostJSON(url, message)
+	return client.PostJSON(s.WebhookURL, message)
 }

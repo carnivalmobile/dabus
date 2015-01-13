@@ -14,12 +14,11 @@ notify:
     on_failed:  true
     on_restart: true
   slack:
-    team:    team
-    channel: channel
-    token:   token
-    on_active:  true
-    on_failed:  true
-    on_restart: true
+    webhook_url: webhook_url
+    channel:     channel
+    on_active:   true
+    on_failed:   true
+    on_restart:  true
 `
 
 func TestNewConfigServices(t *testing.T) {
@@ -80,16 +79,12 @@ func TestNewConfigSlack(t *testing.T) {
 		t.Fatal("Error during notify config parsing")
 	}
 
-	if slack.Team != "team" {
-		t.Error("Invalid slack team")
+	if slack.WebhookURL != "webhook_url" {
+		t.Error("Invalid slack webhook_url")
 	}
 
 	if slack.Channel != "channel" {
 		t.Error("Invalid slack channel")
-	}
-
-	if slack.Token != "token" {
-		t.Error("Invalid slack token")
 	}
 
 	if !slack.Active {
