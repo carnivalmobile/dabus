@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 const (
 	slackActiveMessage  = "Service *%s* is active"
@@ -8,11 +11,18 @@ const (
 	slackRestartMessage = "Service *%s* has auto-restarted"
 )
 
+type SlackAttachmentField struct {
+	Title string `json:"title"`
+	Value string `json:"value"`
+	Short bool   `json:"short"`
+}
+
 type SlackAttachment struct {
-	Fallback string   `json:"fallback"`
-	Text     string   `json:"text"`
-	Color    string   `json:"color"`
-	MrkdwnIn []string `json:"mrkdwn_in"`
+	Fallback string                 `json:"fallback"`
+	Text     string                 `json:"text"`
+	Color    string                 `json:"color"`
+	MrkdwnIn []string               `json:"mrkdwn_in"`
+	Fields   []SlackAttachmentField `json:"fields"`
 }
 
 type SlackMessage struct {
@@ -48,8 +58,15 @@ func (s *Slack) SendWithClient(client HTTPClient, event *ServiceEvent) error {
 }
 
 func (s *Slack) composeMessage(color string, message string) *SlackMessage {
+
+	fields := []SlackAttachmentField{}
+
+	if hostname, _ := os.Hostname(); hostname != "" {
+		fields = append(fields, SlackAttachmentField{"Host", hostname, false})
+	}
+
 	attachments := SlackAttachment{
-		message, message, color, []string{"fallback", "text"},
+		message, message, color, []string{"fallback", "text"}, fields,
 	}
 
 	return &SlackMessage{s.Channel, "Systemd", []SlackAttachment{attachments}}
