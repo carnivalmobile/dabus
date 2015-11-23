@@ -24,6 +24,7 @@ type SlackMessage struct {
 type Slack struct {
 	WebhookURL string `yaml:"webhook_url,omitempty"`
 	Channel    string `yaml:"channel,omitempty"`
+	Username   string `yaml:"username,omitempty"`
 	Active     bool   `yaml:"on_active,omitempty"`
 	Failed     bool   `yaml:"on_failed,omitempty"`
 	Restart    bool   `yaml:"on_restart,omitempty"`
@@ -52,7 +53,7 @@ func (s *Slack) composeMessage(color string, message string) *SlackMessage {
 		message, message, color, []string{"fallback", "text"},
 	}
 
-	return &SlackMessage{s.Channel, "Systemd", []SlackAttachment{attachments}}
+	return &SlackMessage{s.Channel, s.Username, []SlackAttachment{attachments}}
 }
 
 func (s *Slack) sendActive(client HTTPClient, event *ServiceEvent) error {
