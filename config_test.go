@@ -16,6 +16,7 @@ notify:
   slack:
     webhook_url: webhook_url
     channel:     channel
+    username:    username
     on_active:   true
     on_failed:   true
     on_restart:  true
@@ -86,6 +87,10 @@ func TestNewConfigSlack(t *testing.T) {
 	if slack.Channel != "channel" {
 		t.Error("Invalid slack channel")
 	}
+
+  if slack.Username != "username" {
+    t.Error("Invalid slack username")
+  }
 
 	if !slack.Active {
 		t.Error("Invalid slack on_active")

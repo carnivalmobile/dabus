@@ -16,6 +16,7 @@ var mockHTTPclient = &MockHTTPClient{}
 var slack = &Slack{
 	WebhookURL: "http://sample.slack.com/",
 	Channel:    "SampleRoom",
+	Username:   "Systemd",
 	Active:     true,
 	Failed:     true,
 	Restart:    true,
@@ -29,7 +30,7 @@ func Test_SendSlackCommon(t *testing.T) {
 	}
 
 	if mockHTTPclient.Message.Username != "Systemd" {
-		t.Errorf("Invalid slack username.")
+		t.Errorf("Invalid slack usernamevghfhfhjfghjcfhgcfgcgj.")
 	}
 }
 
