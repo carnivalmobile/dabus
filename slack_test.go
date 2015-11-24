@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 type MockHTTPClient struct {
 	Message *SlackMessage
@@ -31,6 +34,10 @@ func Test_SendSlackCommon(t *testing.T) {
 
 	if mockHTTPclient.Message.Username != "Systemd" {
 		t.Errorf("Invalid slack usernamevghfhfhjfghjcfhgcfgcgj.")
+	}
+
+	if hostname, _ := os.Hostname(); hostname != "" && (len(mockHTTPclient.Message.Attachments[0].Fields) == 0 || mockHTTPclient.Message.Attachments[0].Fields[0].Value != hostname) {
+		t.Errorf("Invalid slack hostname field")
 	}
 }
 
