@@ -1,4 +1,4 @@
-# Dabus
+# Dabus : System Notifier
 
 Dabus is a systemd dbus notification observer written in Go, bundled with a Hipchat and Slack notifier.
 
